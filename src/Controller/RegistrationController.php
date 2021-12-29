@@ -27,11 +27,6 @@ class RegistrationController extends AbstractController
     
     /**
      * @Route("/registration", name="registration")
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param LoginFormAuthenticator $loginAuthenticator
-     * @param GuardAuthenticatorHandler $guard
-     * @return Response
      */
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager)
     {
