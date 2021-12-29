@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="login-form bg-light mt-4 p-4">
+            
+            <h1 class="h3 mb-3 font-weight-normal">Profile</h1>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ user.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{ (user.status) ? 'Active' : 'Not Active' }}</td>
+                    </tr>
+                    <tr>
+                        <th>User Type</th>
+                        <td>{{ user.userType }}</td>
+                    </tr>
+                    <tr>
+                        <th>Profile Image</th>
+                        <td>{% if user.profileImage %}
+                            <img src="{{ asset('uploads/profiles/' ~ user.profileImage) }}" width="100" height="100" >
+                            {% else %}
+                            <img src="{{ asset('images/user-avatar.png') }}" width="100" height="100" >
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
