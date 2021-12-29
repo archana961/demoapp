@@ -49,14 +49,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *      min = 8,
      *      minMessage = "password must be at least {{ limit }} characters long"
      * )
-     * @Assert\Regex(
-     *     pattern = "/^[a-z]+$/i", match=false,
-     *     message="Password should contain atleast one capital letter."
-     * )
-     * @Assert\Regex(
-     *     pattern = "/[\'^£$%&*()}{@#~?><>,|=_+¬-]/", match=false,
-     *     message="Password should contain atleast one special character."
-     * )
      */
     private $password;
 

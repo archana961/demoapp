@@ -26,6 +26,11 @@ $(document).ready(function() {
         if($('#user_profileFile')[0].files[0] != undefined){
             data.append('user[profileFile]', $('#user_profileFile')[0].files[0]);
         }
+        $('.js-error').remove();
+        if(validatePassword($('#user_password').val()) == false){
+            $($('form[name="user"]').find('[name*="password"]')[0]).before('<p class="js-error"><span class="alert alert-danger">Password must contain one upper case, special character and minimum length should be 8.</span></p>');
+            return false;
+        }
         $.ajax({
             type: 'POST',
             url: '/registration',
@@ -36,6 +41,9 @@ $(document).ready(function() {
             success: function(data) {
                 $('.js-error').remove();
                 if(data.result == 0) {
+                    if(data.message == 'Invalid form'){
+                        window.location.reload;
+                    }
                     for (var key in data.data) {
                         $($('form[name="user"]').find('[name*="'+key+'"]')[0]).before('<p class="js-error"><span class="alert alert-danger">'+data.data[key]+'</span></p>');
                     }
@@ -53,5 +61,12 @@ $(document).ready(function() {
             }
         });
     });
+
+    function validatePassword(pass){
+        let pattern = /^(?=.*?[A-Z])(?=.*?[#?!@$%^&*-])/;
+        if ( pass.length < 8 ) return false;
+        if(pattern.test(pass)) return true;
+        return false;
+    }
 
 });

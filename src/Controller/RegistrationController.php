@@ -94,6 +94,16 @@ class RegistrationController extends AbstractController
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
 
+            //log event to database
+            if($user){
+                $eventLog = new EventLogs();
+                $eventLog->setEventType($entityManager->getReference('App\Entity\EventType', 1));
+                $eventLog->setUser($user);
+                $entityManager->persist($eventLog);
+                $entityManager->flush();
+
+            }  
+
             return $this->json(
                 ['result' => 1,
                 'message' => 'ok',
